@@ -1,0 +1,148 @@
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <style>
+      .code {
+        background-color: #eee;
+        font-family: monospace;
+        padding: 2px;
+      }
+      body {
+        font-family: helvetica;
+      }
+
+      h4 {
+        background-color: #ffffdb;
+      }
+
+      a {
+        color: blue;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="docs">
+      <h1>lisplike 1.1.0</h1>
+      <!--
+        for whatever reason a elements dont work correctly because they load the page in the link when we are on a different page
+      -->
+      <a onclick="window.location.pathname='/repl.html'">LispLike REPL</a>
+      <a onclick="window.location.pathname='/tryit.html'"
+        >LispLike Program Interpreter</a
+      >
+      <p>Table Of Contents</p>
+      <ol id="tableofcontents"></ol>
+      <h2>About</h2>
+      <p>
+        This language was created as an exercise. It uses lisp like syntax to
+        make parsing easy.
+      </p>
+
+      <h2>Running code</h2>
+      <p>To run code first you need import env.js and create an enviroment:</p>
+      <p class="code">
+        import Enviroment from "./env.js"; <br />
+        var env = new Enviroment();
+      </p>
+      <p>
+        An enviroment keeps its state when running multiple programs, because of
+        this you will need to create a new enviroment to reset it.
+      </p>
+      <p>
+        Now to run the code, we simply call the run function with our code as a
+        parameter:
+      </p>
+      <p class="code">env.run("(print (+ i1 i2))")</p>
+      <p>
+        By itself the run function only returns the enviroment object, but the
+        output can be accesed using Enviroment.output like so:
+      </p>
+      <p class="code">console.log(env.output) // Prints 3 to the console</p>
+      <p>
+        We can view the values of all of the symbols (variables and functions)
+        by looking at the symbol look up table:
+      </p>
+      <p class="code">console.log(env.symLUT)</p>
+
+      <h2>Types</h2>
+
+      <h4>Integer</h4>
+      <p>Simple Integer type.</p>
+
+      <h4>Symbol</h4>
+      <p>Used to reference variables and functions</p>
+
+      <h4>Boolean</h4>
+      <p>
+        Simple boolean, use lowercase <span class="code">true</span> and
+        <span class="code">false</span>
+      </p>
+
+      <h4>Arrays</h4>
+      <p>
+        Simple array type, create an array using the
+        <span class="code">arr</span> function and retreive values with
+        <span class="code">garr</span>.
+      </p>
+
+      <h4>Property Lists/Objects</h4>
+      <p>Coming in a later version.</p>
+
+      <h2>Built in functions</h2>
+      <!-- The docs will automatically generate in this box -->
+      <div id="autogen"></div>
+
+      <h2>Adding New JavaScript Functions</h2>
+      <p>Coming after lisplike userfunctions are implemented</p>
+      <h2>Changelog</h2>
+      <p>
+        <b>1.1.0: 11/28/2018</b><br />
+        + Method of importing modules into the look up table<br />
+        + 37 Unit Tests (all passing in 1.1.0)<br />
+        + not operator<br />
+        + and operator<br />
+        + or operator<br />
+        + > operator<br />
+        + < operator<br />
+        + \ operator<br />
+        + * operator<br />
+        + ** operator<br />
+        + Automatic documentation system<br />
+        + Up to date documentation<br />
+        + REPL (read eval print loop) added<br />
+        <b>>1.0.0:</b><br />
+        + Turing completeness (I think??) <br />
+        + Variables <br />
+        + Functions <br />
+        + If statements <br />
+        + Print<br />
+        + Arrays<br />
+        + Boolean<br />
+        + Integer<br />
+        + Strings<br />
+        + Void<br />
+        + == operator<br />
+        + != operator<br />
+        + + operator<br />
+        + - operator<br />
+      </p>
+      <h3>Upcoming:</h3>
+      <ul>
+        <li>Objects/Property lists</li>
+        <li>Web Request Support</li>
+        <li>Shorthand Array Syntax</li>
+        <li>Variable Viewer</li>
+        <li>Logging Module</li>
+        <li>Error system and error checking</li>
+        <li>Examples in the documentation</li>
+        <li>Try/Except</li>
+      </ul>
+    </div>
+
+    <script src="website/index.js"></script>
+    <script src="website/docgen.js" type="module"></script>
+  </body>
+</html>
