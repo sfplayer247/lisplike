@@ -7,19 +7,19 @@ function runNewEnvironment(code) {
 // Equals operator
 test("1 == 1 should evaluate to equal", () => {
   expect(
-    runNewEnvironment("(if (== i1 i1) (print 'equal') (print 'inequal'))")
+    runNewEnvironment("(if (== 1 1) (print 'equal') (print 'inequal'))")
   ).toBe("equal");
 });
 
 test("1 == 0 should evaluate to inequal", () => {
   expect(
-    runNewEnvironment("(if (== i1 i0) (print 'equal') (print 'inequal'))")
+    runNewEnvironment("(if (== 1 0) (print 'equal') (print 'inequal'))")
   ).toBe("inequal");
 });
 
 test("0 == 1 should evaluate to inequal", () => {
   expect(
-    runNewEnvironment("(if (== i0 i1) (print 'equal') (print 'inequal'))")
+    runNewEnvironment("(if (== 0 1) (print 'equal') (print 'inequal'))")
   ).toBe("inequal");
 });
 
@@ -43,19 +43,19 @@ test("'apple' == 'orange' should evaluate to inequal", () => {
 
 test("1 != 1 should evaluate to false", () => {
   expect(
-    runNewEnvironment("(if (!= i1 i1) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (!= 1 1) (print 'true') (print 'false'))")
   ).toBe("false");
 });
 
 test("1 != 0 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (!= i1 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (!= 1 0) (print 'true') (print 'false'))")
   ).toBe("true");
 });
 
 test("0 != 1 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (!= i0 i1) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (!= 0 1) (print 'true') (print 'false'))")
   ).toBe("true");
 });
 
@@ -77,7 +77,7 @@ test("'apple' != 'orange' should evaluate to true", () => {
 
 test("'apple' != 1 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (!= 'apple' i1) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (!= 'apple' 1) (print 'true') (print 'false'))")
   ).toBe("true");
 });
 
@@ -161,24 +161,24 @@ test("false or false or false or true should evaluate to true", () => {
 
 test("10 > 0 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (> i10 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (> 10 0) (print 'true') (print 'false'))")
   ).toBe("true");
 });
 
 test("-10 > 0 should evaluate to false", () => {
   expect(
-    runNewEnvironment("(if (> i-10 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (> -10 0) (print 'true') (print 'false'))")
   ).toBe("false");
 });
 
 test("10 < 0 should evaluate to false", () => {
   expect(
-    runNewEnvironment("(if (< i10 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (< 10 0) (print 'true') (print 'false'))")
   ).toBe("false");
 });
 
 test("-10 < 0 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (< i-10 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (< -10 i0) (print 'true') (print 'false'))")
   ).toBe("true");
 });

@@ -26,12 +26,6 @@ export default {
           2,
           "Out of bounds exception, end of slice cannot be greater than string length."
         );
-        return {
-          type: "error",
-          value:
-            "Out of bounds exception, end of slice cannot be greater than string length.",
-          index: 2
-        };
       } else {
         var sliced = args[0].value.slice(args[1].value);
       }
@@ -47,7 +41,6 @@ export default {
         e.invalidType
       } instead`;
       env.error(1, eMessage);
-      return { type: "error", value: eMessage, index: 1 };
     }
   }
 };

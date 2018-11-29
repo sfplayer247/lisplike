@@ -1,4 +1,13 @@
 export default {
+  docthrow: {
+    parameters: "msg:string",
+    returns: "void",
+    desc:
+      "Throws an error with the provided message. Will always use error 3 because that means a user defined exception."
+  },
+  throw: (args, env) => {
+    env.error(3, args[0].value);
+  },
   docprint: {
     parameters: "a:any|...",
     returns: "void",
@@ -6,8 +15,9 @@ export default {
   },
   print: (args, env) => {
     for (var i = 0; i < args.length; i++) {
-      env.output += args[i].value + "\n";
+      env.output += args[i].value;
     }
+    env.output += "\n";
   },
   docarr: {
     parameters: "element:any|...",
@@ -30,13 +40,13 @@ export default {
     return null;
   },
   docset: {
-    parameters: "varname:string|value:any",
+    parameters: "varname:symbol|value:any",
     returns: "null",
     desc: "Sets the value of a variable."
   },
   set: (args, env) => {
-    env.symLUT[args[0].value] = args[1];
-    env.symLUT[args[0].value].ref = args[0].value;
+    env.symLUT[args[0].ref] = args[1];
+    env.symLUT[args[0].ref].ref = args[0].ref;
   },
   docgarr: {
     parameters: "array:arrar|index:num",

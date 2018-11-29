@@ -19,11 +19,9 @@ test("goodbye does not start with hello", () => {
 
 // Slice
 test("Slice with one argument", () => {
-  expect(runNewEnvironment("(print (slice 'hello world' i6))")).toBe("world");
+  expect(runNewEnvironment("(print (slice 'hello world' 6))")).toBe("world");
 });
 
 test("Slice with two arguments", () => {
-  expect(runNewEnvironment("(print (slice 'hello world' i0 i5))")).toBe(
-    "hello"
-  );
+  expect(runNewEnvironment("(print (slice 'hello world' 0 5))")).toBe("hello");
 });

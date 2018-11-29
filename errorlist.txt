@@ -2,3 +2,5 @@ tle:1
   Incorrect type provided.
 tle:2
   Out of bounds.
+tle:3
+  User threw error

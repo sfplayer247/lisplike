@@ -7,12 +7,12 @@ function runNewEnvironment(code) {
 test("Count to ten using function recursion", () => {
   expect(
     runNewEnvironment(`(void
-    (set 'x' i0)
+    (set x 0)
     (func test (
       void
-      (if (< x i10) (void 
+      (if (< x 10) (void 
       (print x)
-      (set 'x' (+ x i1))
+      (set x (+ x 1))
       (test)
       ))
     ))

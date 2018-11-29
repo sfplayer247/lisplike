@@ -19,5 +19,11 @@ export default {
     returns: "void",
     desc:
       "Runs the <span class='code'>code</span> until the condition evaluates to false."
+  },
+  doctry: {
+    parameters: "try:expression|except:expression`",
+    returns: "void",
+    desc:
+      "Runs the <span class='code'>try</span> expression and if it throws an expression it runs the second argument. The error can be accessed through the <span class='code'>error</span> variable."
   }
 };

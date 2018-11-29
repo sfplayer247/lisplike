@@ -10,9 +10,10 @@
 
 function getDocsFromModule(module) {
   var docs = {};
-  for (var i = 0; i < Object.keys(module).length; i++) {
-    if (Object.keys(module)[i].startsWith("doc")) {
-      docs[Object.keys(module)[i].slice(3)] = module[Object.keys(module)[i]];
+  var keys = Object.keys(module);
+  for (var i = 0; i < keys.length; i++) {
+    if (keys[i].startsWith("doc")) {
+      docs[keys[i].slice(3)] = module[keys[i]];
     }
   }
 
@@ -85,11 +86,10 @@ function createHTMLFromDocs(docs, name) {
 }
 
 function generateTableOfContents(docs, name) {
+  var keys = Object.keys(docs);
   var html = `<li><a href="#docs${name}">${name}</a><ol>`;
-  for (var i = 0; i < Object.keys(docs).length; i++) {
-    html += `<li><a href="#docs${name + Object.keys(docs)[i]}">${
-      Object.keys(docs)[i]
-    }</a></li>`;
+  for (var i = 0; i < keys.length; i++) {
+    html += `<li><a href="#docs${name + keys[i]}">${keys[i]}</a></li>`;
   }
   return html + "</ol ></li>";
 }
@@ -106,7 +106,7 @@ function generateTableOfContents(docs, name) {
     description: a module
   returns void
 */
-export default function addDocsToPage(name, module) {
+export default async function addDocsToPage(name, module) {
   var docs = getDocsFromModule(module);
   document.getElementById(
     "tableofcontents"

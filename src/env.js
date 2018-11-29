@@ -6,6 +6,7 @@ import operators from "./modules/operators.js";
 import comparison from "./modules/comparison.js";
 import misc from "./modules/misc.js";
 import strings from "./modules/strings.js";
+import plists from "./modules/plist.js";
 
 export default class Enviroment {
   constructor() {
@@ -20,6 +21,7 @@ export default class Enviroment {
     this.importModule(operators);
     this.importModule(comparison);
     this.importModule(strings);
+    this.importModule(plists);
   }
 
   // Used for importing javascript modules into the lookup table
@@ -32,6 +34,8 @@ export default class Enviroment {
       this.execute(this.parse(code), this);
       return this;
     } catch (e) {
+      console.log(e);
+      //this.output += `[error][lle:${number}] ${message}\n`;
       return this;
     }
   }
@@ -50,7 +54,6 @@ export default class Enviroment {
   }
 
   error(number, message) {
-    this.output += `[error][lle:${number}] ${message}\n`;
-    throw { type: "error", value: message, index: 2 };
+    throw { type: "error", value: message, index: number };
   }
 }

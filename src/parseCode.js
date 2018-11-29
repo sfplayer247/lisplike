@@ -17,6 +17,8 @@ function tokenizeString(s) {
   var s = s
     .replace(/\(/gi, " ( ")
     .replace(/\)/gi, " ) ")
+    .replace(/\[/gi, " [ ")
+    .replace(/\]/gi, " ] ")
     .split(" ");
 
   // Remove empty strings
@@ -29,22 +31,59 @@ function tokenizeString(s) {
 
 function buildAST(tokens) {
   var token = tokens.shift();
-  // Expressions
+  //
+  // Expressions using ()
+  //
   if (token == "(") {
     var ast = [];
     // Parse tokens until the expression ends
     while (tokens[0] != ")") {
-      ast.push(buildAST(tokens));
+      var tok = buildAST(tokens);
+      if (tok != null) ast.push(tok);
     }
     // Remove ending parenthesis
     tokens.shift();
-    return { type: "expression", value: ast };
+    if (tokens[0] == undefined || tokens[0][0] != ":") {
+      return { type: "expression", value: ast };
+    } else {
+      return {
+        type: "expression",
+        value: ast,
+        property: tokens.shift().slice(1)
+      };
+    }
   }
+  //
+  // Expressions using []
+  //
+  if (token == "[") {
+    var ast = [];
+    // Parse tokens until the expression ends
+    while (tokens[0] != "]") {
+      var tok = buildAST(tokens);
+      if (tok != null) ast.push(tok);
+    }
+    // Remove ending parenthesis
+    tokens.shift();
+    if (tokens[0] == undefined || tokens[0][0] != ":") {
+      return { type: "expression", value: ast };
+    } else {
+      return {
+        type: "expression",
+        value: ast,
+        property: tokens.shift().slice(1)
+      };
+    }
+  }
+  //
   // Numbers
-  else if (token[0] == "i" && token[1] != "f") {
-    return { type: "number", value: parseInt(token.slice(1)) };
+  //
+  else if (!isNaN(token)) {
+    return { type: "number", value: parseFloat(token) };
   }
+  //
   // Strings
+  //
   else if (token[0] == "'") {
     var string = token;
     while (!string.endsWith("'")) {
@@ -52,12 +91,29 @@ function buildAST(tokens) {
     }
     return { type: "string", value: string.slice(1, -1) };
   }
+  //
+  // Comments
+  //
+  else if (token[0] == ";") {
+    while (!token.endsWith(";")) {
+      token = tokens.shift();
+    }
+  }
+  //
   // Booleans
+  //
   else if (token == "true" || token == "false") {
     return { type: "boolean", value: token };
   }
+  //
   // Symbols
+  //
   else {
-    return { type: "symbol", value: "", ref: token };
+    if (token.indexOf(":") == -1) {
+      return { type: "symbol", value: "", ref: token };
+    } else {
+      var split = token.split(":");
+      return { type: "symbol", value: "", ref: split[0], property: split[1] };
+    }
   }
 }
