@@ -11,7 +11,6 @@ export default function parse(x) {
     description: string to be converted to array
   returns array
 */
-
 function tokenizeString(s) {
   // Split by parenthesis
   var s = s
@@ -29,6 +28,16 @@ function tokenizeString(s) {
   return s;
 }
 
+/*
+  buildAST(tokens:array)
+  description: Takes an array from tokenizeString and classifys each of the elements into a AST
+
+  param tokens
+    type: array
+    description: Generated from tokenizeString
+  returns object
+    description: the parsed AST
+*/
 function buildAST(tokens) {
   var token = tokens.shift();
   //
@@ -43,12 +52,14 @@ function buildAST(tokens) {
     }
     // Remove ending parenthesis
     tokens.shift();
+    // Check if we are trying to access a property
     if (tokens[0] == undefined || tokens[0][0] != ":") {
       return { type: "expression", value: ast };
     } else {
       return {
         type: "expression",
         value: ast,
+        // Remove the colon from the property name
         property: tokens.shift().slice(1)
       };
     }
@@ -65,12 +76,14 @@ function buildAST(tokens) {
     }
     // Remove ending parenthesis
     tokens.shift();
+    // Check if we are trying to access a property
     if (tokens[0] == undefined || tokens[0][0] != ":") {
       return { type: "expression", value: ast };
     } else {
       return {
         type: "expression",
         value: ast,
+        // Remove the colon from the property name
         property: tokens.shift().slice(1)
       };
     }
@@ -109,9 +122,11 @@ function buildAST(tokens) {
   // Symbols
   //
   else {
+    // Check if a property is being accessed
     if (token.indexOf(":") == -1) {
       return { type: "symbol", value: "", ref: token };
     } else {
+      // Split the symbol into the name and property
       var split = token.split(":");
       return { type: "symbol", value: "", ref: split[0], property: split[1] };
     }

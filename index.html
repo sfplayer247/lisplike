@@ -86,12 +86,16 @@
       <!-- Types -->
       <h2 id="anchortypes">Types</h2>
 
-      <h4>Integer</h4>
-      <p>Simple Integer type.</p>
+      <h4>Number</h4>
+      <p>Simple number type, needs no definition. Supports decimals and integers.</p>
+      <p class="code">(print 2)</p>
 
       <h4>Symbol</h4>
-      <p>Used to reference variables and functions</p>
-
+      <p>Used to reference variables and functions. You can set the value of a symbol with the following:</p>
+      <p class="code">(set x 100)</p>
+      <p>And you can retrieve the value just by typing the symbol:</p>
+      <p class="code">(print x)</p>
+      
       <h4>Boolean</h4>
       <p>
         Simple boolean, use lowercase <span class="code">true</span> and
@@ -106,54 +110,66 @@
       </p>
 
       <h4>Property Lists/Objects</h4>
-      <p>Coming in a later version.</p>
-
+      <p>Property lists are the equivalent of objects or dictonaries. You can create a property list with the following:</p>
+      <p class="code">(plist (arr 'a' 2) (arr 'b', 10))</p>
+      <p>And you can get properties from the object using a colon:</p>
+      <p class="code">(print object:property)</p>
+      
       <!-- Examples -->
       <h2 id="anchorexamples">Examples</h2>
+
       <script>
         function viewInTryIt(code) {
           localStorage.setItem("tryitView", code);
           window.location.pathname = "/tryit.html";
         }
       </script>
-      <h4 id="examplehello">Hello World:</h4>
-      <p class="code">(print 'Hello World')</p>
-      <button onclick="viewInTryIt(`(print 'Hello World')`)">Try it ></button>
-      <h4 id="examplesimplemath">Simple Math:</h4>
-      <p class="code">
-        (void<br />
-        &nbsp(print '2 times 2 equals: ' (* 2 2))<br />
-        &nbsp(print '2 plus 2 equals: ' (+ 2 2))<br />
-        &nbsp(print '2 minus 1 equals: ' (- 2 1))<br />
-        &nbsp(print '8 divided by 2 equals: ' (/ 8 2))<br />
-        &nbsp(print '2 to the power of 4 equals: ' (** 2 4))<br />
-        )<br />
-      </p>
-      <button
-        onclick="viewInTryIt(`(void
+
+      <div>
+        <h4 id="examplehello">Hello World:</h4>
+        <p class="code">(print 'Hello World')</p>
+        <button onclick="viewInTryIt(`(print 'Hello World')`)">Try it ></button>
+      </div>
+      
+      <div>
+        <h4 id="examplesimplemath">Simple Math:</h4>
+        <p class="code">
+          (void<br />
+          &nbsp(print '2 times 2 equals: ' (* 2 2))<br />
+          &nbsp(print '2 plus 2 equals: ' (+ 2 2))<br />
+          &nbsp(print '2 minus 1 equals: ' (- 2 1))<br />
+          &nbsp(print '8 divided by 2 equals: ' (/ 8 2))<br />
+          &nbsp(print '2 to the power of 4 equals: ' (** 2 4))<br />
+          )<br />
+        </p>
+        <button
+          onclick="viewInTryIt(`(void
  (print '2 times 2 equals: ' (* 2 2))
  (print '2 plus 2 equals: ' (+ 2 2))
  (print '2 minus 1 equals: ' (- 2 1))
  (print '8 divided by 2 equals: ' (/ 8 2))
  (print '2 to the power of 4 equals: ' (** 2 4))
 )`)"
-      >
-        Try it >
-      </button>
-      <h4 id="examplecountten">Counting to ten:</h4>
-      <p class="code">
-        (void<br />
-        &nbsp(set 'x' 0) ;set x to zero;<br />
-        &nbsp(while (< x 10) <br />
-        &nbsp&nbsp(void <br />
-        &nbsp&nbsp&nbsp(+= x 1) ;increment x by one every iteration;<br />
-        &nbsp&nbsp&nbsp(print x) <br />
-        &nbsp&nbsp) <br />
-        &nbsp) <br />
-        ) <br />
-      </p>
-      <button
-        onclick="viewInTryIt(`(void
+        >
+          Try it >
+        </button>
+      </div>
+      
+      <div>
+        <h4 id="examplecountten">Counting to ten:</h4>
+        <p class="code">
+          (void<br />
+          &nbsp(set 'x' 0) ;set x to zero;<br />
+          &nbsp(while (< x 10) <br />
+          &nbsp&nbsp(void <br />
+          &nbsp&nbsp&nbsp(+= x 1) ;increment x by one every iteration;<br />
+          &nbsp&nbsp&nbsp(print x) <br />
+          &nbsp&nbsp) <br />
+          &nbsp) <br />
+          ) <br />
+        </p>
+        <button
+          onclick="viewInTryIt(`(void
   (set 'x' 0) ;set x to zero;
   (while (< x 10)
    (void
@@ -162,9 +178,10 @@
     )
   )
 )`)"
-      >
-        Try It >
-      </button>
+        >
+          Try It >
+        </button>
+      </div>
 
       <!-- The docs will automatically generate in this box -->
       <div id="autogen"></div>
@@ -227,7 +244,6 @@
       </p>
       <h3>Upcoming:</h3>
       <ul>
-        <li>Objects/Property lists</li>
         <li>Web Request Support</li>
         <li>Shorthand Array Syntax</li>
         <li>Variable Viewer</li>
@@ -235,6 +251,7 @@
         <li>Error Checking on all Functions</li>
         <li>Examples in the documentation</li>
         <li>Scoping</li>
+        <li>CLI interface</li>
       </ul>
     </div>
 
