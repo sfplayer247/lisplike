@@ -179,6 +179,43 @@ test("10 < 0 should evaluate to false", () => {
 
 test("-10 < 0 should evaluate to true", () => {
   expect(
-    runNewEnvironment("(if (< -10 i0) (print 'true') (print 'false'))")
+    runNewEnvironment("(if (< -10 0) (print 'true') (print 'false'))")
+  ).toBe("true");
+});
+
+// greater than or equal to and less than or equal to operators
+test("-10 <= 0 should evaluate to true", () => {
+  expect(
+    runNewEnvironment("(print (<= -10 0))")
+  ).toBe("true");
+});
+
+test("10 <= 0 should evaluate to false", () => {
+  expect(
+    runNewEnvironment("(print (<= 10 0))")
+  ).toBe("false");
+});
+
+test("0 <= 0 should evaluate to true", () => {
+  expect(
+    runNewEnvironment("(print (<= 0 0))")
+  ).toBe("true");
+});
+
+test("10 >= 0 should evaluate to true", () => {
+  expect(
+    runNewEnvironment("(print (>= 10 0))")
+  ).toBe("true");
+});
+
+test("-10 >= 0 should evaluate to false", () => {
+  expect(
+    runNewEnvironment("(print (>= -10 0))")
+  ).toBe("false");
+});
+
+test("0 >= 0 should evaluate to true", () => {
+  expect(
+    runNewEnvironment("(print (>= 0 0))")
   ).toBe("true");
 });

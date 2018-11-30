@@ -83,5 +83,27 @@ export default {
       type: "boolean",
       value: args[0].value < args[1].value ? "true" : "false"
     };
+  },
+  "doc>=": {
+    parameters: "a:num|b:num",
+    returns: "bool",
+    desc: "Returns true if a is greater than or equal to b."
+  },
+  ">=": args => {
+    return {
+      type: "boolean",
+      value: args[0].value >= args[1].value ? "true" : "false"
+    };
+  },
+  "doc<=": {
+    parameters: "a:num|b:num",
+    returns: "bool",
+    desc: "Returns true if a is less than or equal to b."
+  },
+  "<=": args => {
+    return {
+      type: "boolean",
+      value: args[0].value <= args[1].value ? "true" : "false"
+    };
   }
 };
