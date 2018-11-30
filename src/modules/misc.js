@@ -8,6 +8,21 @@ export default {
   throw: (args, env) => {
     env.error(3, args[0].value);
   },
+  docprompt: {
+    parameters: "msg:string",
+    returns: "string",
+    desc:
+      "Shows a prompt where the user can input text. Returns the string that the user enters."
+  },
+  prompt: (args, env) => {
+    var response = prompt(args[0].value)
+    if (response != null) {
+      return {type: 'string', value: response}
+    }
+    else {
+      return {type: 'string', value: ""}
+    }
+  },
   docprint: {
     parameters: "a:any|...",
     returns: "void",
