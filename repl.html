@@ -4,12 +4,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>LispLike REPL</title>
+  <style>
+    body {
+      font-family: helvetica;
+    }
+  </style>
 </head>
 
 <body>
   <h1>LispLike REPL</h1>
   <input id="input"></input>
-  <button id="submit">run</button>
+  <button id="submit">Run</button>
+  <input type="checkbox" id="parseCheckbox">Output AST to console
   <p id="output"></p>
   <script src="website/repl.js" type="module"></script>
 </body>
