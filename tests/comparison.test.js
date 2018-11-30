@@ -184,62 +184,50 @@ test("-10 < 0 should evaluate to true", () => {
 });
 
 test("Type checking for >", () => {
-  expect(
-    runNewEnvironment("(try (> 'test' 0) (print error))")
-  ).toBe("Incorrect type, expected number but got string instead");
+  expect(runNewEnvironment("(try (> 'test' 0) (print error:message))")).toBe(
+    "Incorrect type, expected number but got string instead"
+  );
 });
 
 test("Type checking for <", () => {
-  expect(
-    runNewEnvironment("(try (< 'test' 0) (print error))")
-  ).toBe("Incorrect type, expected number but got string instead");
+  expect(runNewEnvironment("(try (< 'test' 0) (print error:message))")).toBe(
+    "Incorrect type, expected number but got string instead"
+  );
 });
 
 // greater than or equal to and less than or equal to operators
 test("-10 <= 0 should evaluate to true", () => {
-  expect(
-    runNewEnvironment("(print (<= -10 0))")
-  ).toBe("true");
+  expect(runNewEnvironment("(print (<= -10 0))")).toBe("true");
 });
 
 test("10 <= 0 should evaluate to false", () => {
-  expect(
-    runNewEnvironment("(print (<= 10 0))")
-  ).toBe("false");
+  expect(runNewEnvironment("(print (<= 10 0))")).toBe("false");
 });
 
 test("0 <= 0 should evaluate to true", () => {
-  expect(
-    runNewEnvironment("(print (<= 0 0))")
-  ).toBe("true");
+  expect(runNewEnvironment("(print (<= 0 0))")).toBe("true");
 });
 
 test("10 >= 0 should evaluate to true", () => {
-  expect(
-    runNewEnvironment("(print (>= 10 0))")
-  ).toBe("true");
+  expect(runNewEnvironment("(print (>= 10 0))")).toBe("true");
 });
 
 test("-10 >= 0 should evaluate to false", () => {
-  expect(
-    runNewEnvironment("(print (>= -10 0))")
-  ).toBe("false");
+  expect(runNewEnvironment("(print (>= -10 0))")).toBe("false");
 });
 
 test("0 >= 0 should evaluate to true", () => {
-  expect(
-    runNewEnvironment("(print (>= 0 0))")
-  ).toBe("true");
+  expect(runNewEnvironment("(print (>= 0 0))")).toBe("true");
 });
 
 test("Type checking for >=", () => {
-  expect(
-    runNewEnvironment("(try (>= 'test' 0) (print error))")
-  ).toBe("Incorrect type, expected number but got string instead");
+  expect(runNewEnvironment("(try (>= 'test' 0) (print error:message))")).toBe(
+    "Incorrect type, expected number but got string instead"
+  );
 });
 
 test("Type checking for <=", () => {
-  expect(
-    runNewEnvironment("(try (<= 'test' 0) (print error))")
-  ).toBe("Incorrect type, expected number but got string instead");
+  expect(runNewEnvironment("(try (<= 'test' 0) (print error:message))")).toBe(
+    "Incorrect type, expected number but got string instead"
+  );
 });

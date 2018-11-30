@@ -8,14 +8,16 @@ function runNewEnvironment(code) {
 
 test("Throwing and Catching and exception using string 'this is a test error'", () => {
   expect(
-    runNewEnvironment("(try (throw 'this is a test error') (print error))")
+    runNewEnvironment(
+      "(try (throw 'this is a test error') (print error:message))"
+    )
   ).toBe("this is a test error");
 });
 
 test("Throwing and Catching and exception using string 'lisplike'", () => {
-  expect(runNewEnvironment("(try (throw 'lisplike') (print error))")).toBe(
-    "lisplike"
-  );
+  expect(
+    runNewEnvironment("(try (throw 'lisplike') (print error:message))")
+  ).toBe("lisplike");
 });
 
 test("Try statement with no error", () => {

@@ -91,6 +91,12 @@ export default class Enviroment {
   returns void
   */
   error(number, message) {
-    throw { type: "error", value: message, index: number };
+    throw {
+      type: "error",
+      value: {
+        message: { type: "string", value: message },
+        number: { type: "number", value: number }
+      }
+    };
   }
 }
