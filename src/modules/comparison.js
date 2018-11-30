@@ -67,43 +67,76 @@ export default {
     returns: "bool",
     desc: "Returns true if a is greater than b."
   },
-  ">": args => {
-    return {
-      type: "boolean",
-      value: args[0].value > args[1].value ? "true" : "false"
-    };
+  ">": (args, env) => {
+    var types = env.checkTypes(args, ["number", "number"]);
+    if (types.valid) {
+      return {
+        type: "boolean",
+        value: args[0].value > args[1].value ? "true" : "false"
+      };
+    }
+    else {
+      env.error(1, `Incorrect type, expected ${types.expected} but got ${
+        types.invalidType
+        } instead`)
+    }
   },
   "doc<": {
     parameters: "a:num|b:num",
     returns: "bool",
     desc: "Returns true if a is less than b."
   },
-  "<": args => {
-    return {
-      type: "boolean",
-      value: args[0].value < args[1].value ? "true" : "false"
-    };
+  "<": (args, env) => {
+    var types = env.checkTypes(args, ["number", "number"]);
+    if (types.valid) {
+      return {
+        type: "boolean",
+        value: args[0].value < args[1].value ? "true" : "false"
+      };
+    }
+    else {
+      env.error(1, `Incorrect type, expected ${types.expected} but got ${
+        types.invalidType
+        } instead`)
+    }
   },
   "doc>=": {
     parameters: "a:num|b:num",
     returns: "bool",
     desc: "Returns true if a is greater than or equal to b."
   },
-  ">=": args => {
-    return {
-      type: "boolean",
-      value: args[0].value >= args[1].value ? "true" : "false"
-    };
+  ">=": (args, env) => {
+    var types = env.checkTypes(args, ["number", "number"]);
+    if (types.valid) {
+      return {
+        type: "boolean",
+        value: args[0].value >= args[1].value ? "true" : "false"
+      };
+    }
+    else {
+      env.error(1, `Incorrect type, expected ${types.expected} but got ${
+        types.invalidType
+        } instead`)
+    }
   },
   "doc<=": {
     parameters: "a:num|b:num",
     returns: "bool",
     desc: "Returns true if a is less than or equal to b."
   },
-  "<=": args => {
-    return {
-      type: "boolean",
-      value: args[0].value <= args[1].value ? "true" : "false"
-    };
+  "<=": (args, env) => {
+    var types = env.checkTypes(args, ["number", "number"]);
+    if (types.valid) {
+      return {
+        type: "boolean",
+        value: args[0].value <= args[1].value ? "true" : "false"
+      };
+    }
+    else {
+      env.error(1, `Incorrect type, expected ${types.expected} but got ${
+        types.invalidType
+        } instead`)
+    }
   }
+  
 };

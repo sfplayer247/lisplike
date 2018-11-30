@@ -183,6 +183,18 @@ test("-10 < 0 should evaluate to true", () => {
   ).toBe("true");
 });
 
+test("Type checking for >", () => {
+  expect(
+    runNewEnvironment("(try (> 'test' 0) (print error))")
+  ).toBe("Incorrect type, expected number but got string instead");
+});
+
+test("Type checking for <", () => {
+  expect(
+    runNewEnvironment("(try (< 'test' 0) (print error))")
+  ).toBe("Incorrect type, expected number but got string instead");
+});
+
 // greater than or equal to and less than or equal to operators
 test("-10 <= 0 should evaluate to true", () => {
   expect(
@@ -218,4 +230,16 @@ test("0 >= 0 should evaluate to true", () => {
   expect(
     runNewEnvironment("(print (>= 0 0))")
   ).toBe("true");
+});
+
+test("Type checking for >=", () => {
+  expect(
+    runNewEnvironment("(try (>= 'test' 0) (print error))")
+  ).toBe("Incorrect type, expected number but got string instead");
+});
+
+test("Type checking for <=", () => {
+  expect(
+    runNewEnvironment("(try (<= 'test' 0) (print error))")
+  ).toBe("Incorrect type, expected number but got string instead");
 });
