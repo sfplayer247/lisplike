@@ -99,8 +99,12 @@ function buildAST(tokens) {
   //
   else if (token[0] == "'") {
     var string = token;
-    while (!string.endsWith("'")) {
-      string += " " + tokens.shift();
+    while ((token.length == 1 && string == token) || !string.endsWith("'")) {
+      var tok = tokens.shift();
+      if (tok == " [ " || tok == " ] " || tok == " ( " || tok == " ) ") {
+        string += tok.trim();
+      }
+      string += " " + tok;
     }
     return { type: "string", value: string.slice(1, -1) };
   }
