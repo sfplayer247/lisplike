@@ -1,10 +1,10 @@
 import gendoc from "./docgen.js";
-import comparison from "../src/modules/comparison";
-import operators from "../src/modules/operators";
-import misc from "../src/modules/misc";
-import builtins from "../src/modules/builtins";
-import strings from "../src/modules/strings";
-import json from "../src/modules/json";
+import comparison from "../src/modules/comparison.js";
+import operators from "../src/modules/operators.js";
+import misc from "../src/modules/misc.js";
+import builtins from "../src/modules/builtins.js";
+import strings from "../src/modules/strings.js";
+import json from "../src/modules/json.js";
 
 gendoc("Base", builtins);
 gendoc("Comparison", comparison);
