@@ -21,8 +21,13 @@ export default {
     returns: "number",
     desc: "Adds one number to another."
   },
-  "+": args => {
-    return { type: "number", value: args[0].value + args[1].value };
+  "+": (args, env) => {
+    if (env.checkTypes(args, ["number", "number"]).valid) {
+      return { type: "number", value: args[0].value + args[1].value };
+    }
+    else {
+      return { type: "string", value: args[0].value + args[1].value };
+    }
   },
   "doc+=": {
     parameters: "a:symbol b:number",

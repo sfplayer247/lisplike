@@ -1,10 +1,10 @@
 
 
 export default {
-  "doc+": {
-    parameters: "a:number b:number",
-    returns: "number",
-    desc: "Adds one number to another."
+  "docreqget": {
+    parameters: "url:str",
+    returns: "string",
+    desc: "Requests the url and returns the response."
   },
   "reqget": args => {
     var request = new XMLHttpRequest();

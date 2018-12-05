@@ -45,6 +45,7 @@
             <li><a href="#examplehello">Hello World</a></li>
             <li><a href="#examplesimplemath">Simple Math</a></li>
             <li><a href="#examplecountten">Counting to Ten</a></li>
+			      <li><a href="#examplerequest">Web Request</a></li>
           </ul>
         </li>
       </ol>
@@ -190,6 +191,60 @@
           Try It >
         </button>
       </div>
+
+	    <div>
+		    <h4 id="examplerequest">Web Request</h4>
+		    <p class="code">(void <br />
+&nbsp;ask the user for a user to lookup;<br />
+&nbsp(set id (prompt 'user id:'))<br />
+&nbsp;Make sure the ID is within bounds;<br />
+&nbsp(if (and (<= (toNum id) 10) (>= (toNum id) 0))<br />
+&nbsp&nbsp(void<br />
+&nbsp&nbsp;Request the user data;<br />
+&nbsp&nbsp(set user (decode (reqget (+ 'https://jsonplaceholder.typicode.com/users/' id))))<br />
+<br />
+&nbsp&nbsp;Print out the user data;<br />
+&nbsp&nbsp&nbsp(print (+ 'ID: ' user:id))<br />
+&nbsp&nbsp&nbsp(print (+ 'Name: ' user:name))<br />
+&nbsp&nbsp&nbsp(print (+ 'Phone: ' user:phone))<br />
+&nbsp&nbsp&nbsp(print (+ 'Website: ' user:website))<br />
+&nbsp&nbsp&nbsp(print (+ 'Street: ' user:address:street))<br />
+&nbsp&nbsp&nbsp(print (+ 'City: ' user:address:city))<br />
+&nbsp&nbsp&nbsp(print (+ 'Zipcode: ' user:address:zipcode))<br />
+&nbsp&nbsp&nbsp(print (+ 'Suite: ' user:address:suite))<br />
+&nbsp&nbsp)<br />
+&nbsp&nbsp;else statement;<br />
+&nbsp&nbsp(<br />
+&nbsp&nbsp&nbspprint 'Invalid User ID'<br />
+&nbsp&nbsp)<br />
+&nbsp)<br />
+)<br /></p>
+		    <button onclick="viewInTryIt(`(void
+ ;ask the user for a user to lookup;
+ (set id (prompt 'user id:'))
+ ;Make sure the ID is within bounds;
+ (if (and (<= (toNum id) 10) (>= (toNum id) 0))
+  (void
+   ;Request the user data;
+   (set user (decode (reqget (+ 'https://jsonplaceholder.typicode.com/users/' id))))
+
+   ;Print out the user data;
+   (print (+ 'ID: ' user:id))
+   (print (+ 'Name: ' user:name))
+   (print (+ 'Phone: ' user:phone))
+   (print (+ 'Website: ' user:website))
+   (print (+ 'Street: ' user:address:street))
+   (print (+ 'City: ' user:address:city))
+   (print (+ 'Zipcode: ' user:address:zipcode))
+   (print (+ 'Suite: ' user:address:suite))
+  )
+  ;else statement;
+  (
+   print 'Invalid User ID'
+  )
+ )
+)`)">Try it ></button>
+	    </div>
 
       <!-- The docs will automatically generate in this box -->
       <div id="autogen"></div>

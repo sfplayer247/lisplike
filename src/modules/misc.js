@@ -8,6 +8,15 @@ export default {
   throw: (args, env) => {
     env.error(3, args[0].value);
   },
+  doctoNum: {
+    parameters: "s:string",
+    returns: "num",
+    desc:
+      "Converts a string into a number"
+  },
+  toNum: (args, env) => {
+    return {type: "number", value: parseFloat(args[0].value)}
+  },
   docprompt: {
     parameters: "msg:string",
     returns: "string",

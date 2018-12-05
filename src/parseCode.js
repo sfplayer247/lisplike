@@ -74,7 +74,6 @@ function tokenizeString(s) {
     return x.trim();
   });
   s = s.filter(Boolean);
-  console.log('test', s)
   return s;
 }
 
@@ -173,8 +172,8 @@ function buildAST(tokens) {
       return { type: "symbol", value: "", ref: token };
     } else {
       // Split the symbol into the name and property
-      var split = token.split(":");
-      return { type: "symbol", value: "", ref: token, property: tokens.shift().slice(1) };
+      var split = tokens.shift().split(":").slice(1);
+      return { type: "symbol", value: "", ref: token, property: split };
     }
   }
 }

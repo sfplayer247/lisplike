@@ -115,7 +115,7 @@ function runAST(token, env) {
     if (token.ref in env.symLUT) {
       // Check if a property was accessed
       if (token.hasOwnProperty("property")) {
-        return env.symLUT[token.ref].value[token.property];
+        return getProperty(env.symLUT[token.ref], token.property);
       } else {
         return env.symLUT[token.ref];
       }
@@ -126,9 +126,18 @@ function runAST(token, env) {
   //
   else if (token.type == "plist") {
     if (token.hasOwnProperty("property")) {
-      return token.value[token.property];
+      return getProperty(token, token.property);
     } else {
       return token;
     }
   }
+}
+
+function getProperty(object, property) {
+  var out = object;
+  for (var i=0; i<property.length; i++) {
+    out = out.value[property[i]];
+    
+  }
+  return out;
 }
