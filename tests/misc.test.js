@@ -88,3 +88,36 @@ test("Basic property list creation and getting a property.", () => {
     "1"
   );
 });
+
+// String tests
+test("String can contain ':'", () => {
+  expect(runNewEnvironment("(print 'colon:colon : :')")).toBe(
+    "colon:colon : :"
+  );
+});
+
+test("String can contain '('", () => {
+  expect(runNewEnvironment("(print 'open(paren ( (')")).toBe("open(paren ( (");
+});
+
+test("String can contain ')'", () => {
+  expect(runNewEnvironment("(print 'close)paren ) )')")).toBe(
+    "close)paren ) )"
+  );
+});
+
+test("String can contain '['", () => {
+  expect(runNewEnvironment("(print 'open[paren [ [')")).toBe("open[paren [ [");
+});
+
+test("String can contain ']'", () => {
+  expect(runNewEnvironment("(print 'close]paren ] ]')")).toBe(
+    "close]paren ] ]"
+  );
+});
+
+test("String can contain ']', '[', ')', '(' and ':'", () => {
+  expect(runNewEnvironment("(print '][)(: ] [ ) ( : end')")).toBe(
+    "][)(: ] [ ) ( : end"
+  );
+});
