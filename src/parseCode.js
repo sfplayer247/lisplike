@@ -45,26 +45,28 @@ function tokenizeString(s) {
 
   s = splitInput;
   for (var i=0; i<s.length; i++) {
-    while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
-      s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
-      s[i] = s[i].slice(0, s[i].indexOf(":"));
-      
-    }
-    while (s[i].startsWith('(') && s[i] != "(") {
-      s[i] = s[i].slice(1);
-      s.splice(i, 0, '(');
-    }
-    while (s[i].endsWith(')') && s[i] != ")") {
-      s[i] = s[i].slice(0, -1);
-      s.splice(i+1, 0, ')');
-    }
-    while (s[i].startsWith('[') && s[i] != "[") {
-      s[i] = s[i].slice(1);
-      s.splice(i, 0, '[');
-    }
-    while (s[i].endsWith(']') && s[i] != "]") {
-      s[i] = s[i].slice(0, -1);
-      s.splice(i + 1, 0, ']');
+    if (!s[i].startsWith("'") && !s[i].endsWith("'")) {
+      while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
+        s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
+        s[i] = s[i].slice(0, s[i].indexOf(":"));
+        
+      }
+      while (s[i].startsWith('(') && s[i] != "(") {
+        s[i] = s[i].slice(1);
+        s.splice(i, 0, '(');
+      }
+      while (s[i].endsWith(')') && s[i] != ")") {
+        s[i] = s[i].slice(0, -1);
+        s.splice(i+1, 0, ')');
+      }
+      while (s[i].startsWith('[') && s[i] != "[") {
+        s[i] = s[i].slice(1);
+        s.splice(i, 0, '[');
+      }
+      while (s[i].endsWith(']') && s[i] != "]") {
+        s[i] = s[i].slice(0, -1);
+        s.splice(i + 1, 0, ']');
+      }
     }
   }
   // Remove empty strings

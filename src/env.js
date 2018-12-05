@@ -7,7 +7,8 @@ import comparison from "./modules/comparison.js";
 import misc from "./modules/misc.js";
 import strings from "./modules/strings.js";
 import plists from "./modules/plist.js";
-import json from "./modules/json.js"
+import json from "./modules/json.js";
+import requests from "./modules/requests.js";
 
 export default class Enviroment {
   constructor() {
@@ -24,6 +25,7 @@ export default class Enviroment {
     this.importModule(strings);
     this.importModule(plists);
     this.importModule(json);
+    this.importModule(requests)
   }
 
   // Used for importing javascript modules into the lookup table
