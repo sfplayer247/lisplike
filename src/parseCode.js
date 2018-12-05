@@ -13,18 +13,66 @@ export default function parse(x) {
 */
 function tokenizeString(s) {
   // Split by parenthesis
+  /*
   var s = s
     .replace(/\(/gi, " ( ")
     .replace(/\)/gi, " ) ")
     .replace(/\[/gi, " [ ")
     .replace(/\]/gi, " ] ")
-    .split(" ");
+    .split(" ");*/
+  var lines = s.split("\n")
+  var s = "";
+  for (var i=0; i<lines.length; i++) {
+    s += ` ${lines[i].trim()} `;
+  }
+  var splitInput = [];
+  while (s.indexOf(" ") != -1) {
+    var token = s.slice(0, s.indexOf(" "))
+    if (token.startsWith("'")) {
+      splitInput.push(s.slice(0, s.indexOf("'", 1)+1))
+      s = s.slice(s.indexOf("'", 1) + 1)
+    }
+    else if (token != "") {
+      splitInput.push(token.trim());
+      s = s.slice(s.indexOf(" ") + 1)
+    }
+    else {
+      s = s.slice(s.indexOf(" ") + 1)
+    }
+  }
+  // Add the last section to the array
+  splitInput.push(s.slice(0));
 
+  s = splitInput;
+  for (var i=0; i<s.length; i++) {
+    while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
+      s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
+      s[i] = s[i].slice(0, s[i].indexOf(":"));
+      
+    }
+    while (s[i].startsWith('(') && s[i] != "(") {
+      s[i] = s[i].slice(1);
+      s.splice(i, 0, '(');
+    }
+    while (s[i].endsWith(')') && s[i] != ")") {
+      s[i] = s[i].slice(0, -1);
+      s.splice(i+1, 0, ')');
+    }
+    while (s[i].startsWith('[') && s[i] != "[") {
+      s[i] = s[i].slice(1);
+      s.splice(i, 0, '[');
+    }
+    while (s[i].endsWith(']') && s[i] != "]") {
+      s[i] = s[i].slice(0, -1);
+      s.splice(i + 1, 0, ']');
+    }
+  }
   // Remove empty strings
   s = s.map(x => {
     return x.trim();
   });
   s = s.filter(Boolean);
+  console.log('test', s)
   return s;
 }
 
@@ -98,15 +146,7 @@ function buildAST(tokens) {
   // Strings
   //
   else if (token[0] == "'") {
-    var string = token;
-    while ((token.length == 1 && string == token) || !string.endsWith("'")) {
-      var tok = tokens.shift();
-      if (tok == " [ " || tok == " ] " || tok == " ( " || tok == " ) ") {
-        string += tok.trim();
-      }
-      string += " " + tok;
-    }
-    return { type: "string", value: string.slice(1, -1) };
+    return { type: "string", value: token.slice(1, -1) };
   }
   //
   // Comments
@@ -127,12 +167,12 @@ function buildAST(tokens) {
   //
   else {
     // Check if a property is being accessed
-    if (token.indexOf(":") == -1) {
+    if (!tokens[0].startsWith(":")) {
       return { type: "symbol", value: "", ref: token };
     } else {
       // Split the symbol into the name and property
       var split = token.split(":");
-      return { type: "symbol", value: "", ref: split[0], property: split[1] };
+      return { type: "symbol", value: "", ref: token, property: tokens.shift().slice(1) };
     }
   }
 }

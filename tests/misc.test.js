@@ -78,13 +78,13 @@ test("Count to ten using while loop", () => {
 test("Accessing a property of an property list returned by a function", () => {
   expect(
     runNewEnvironment(
-      "(void (func test(plist(arr 'a' 1)(arr 'b' 2)))(print(test):b))"
+      "(void (func test (plist (arr 'a' 1) (arr 'b' 2))) (print (test):b))"
     )
   ).toBe("2");
 });
 
 test("Basic property list creation and getting a property.", () => {
-  expect(runNewEnvironment("(print (plist(arr 'a' 1)(arr 'b' 2)):a)")).toBe(
+  expect(runNewEnvironment("(print (plist (arr 'a' 1) (arr 'b' 2)):a)")).toBe(
     "1"
   );
 });
