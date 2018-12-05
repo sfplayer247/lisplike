@@ -1,13 +1,5 @@
 export default function parse(x) {
-  var start = window.performance.now();
-  var x = tokenizeString(x);
-  var end = window.performance.now();
-  console.log("tokenize: " + (end - start));
-  start = window.performance.now();
-  x = buildAST(x);
-  end = window.performance.now();
-  console.log("buildast: " + (end - start));
-  return x;
+  return buildAST(tokenizeString(x));
 }
 
 /*
@@ -20,34 +12,44 @@ export default function parse(x) {
   returns array
 */
 function tokenizeString(s) {
-  var lines = s.split("\n");
-  var s = "";
-  for (var i = 0; i < lines.length; i++) {
-    s += ` ${lines[i].trim()} `;
-  }
-  var splitInput = [];
+  let tmp = "";
+  // Split on newlines and pad each line
+  s.split("\n").forEach(e => (tmp += ` ${e.trim()} `));
+  s = tmp;
+
+  // Split on spaces and isolate strings
+  let splitInput = [];
+  let token;
   while (s.indexOf(" ") != -1) {
-    var token = s.slice(0, s.indexOf(" "));
+    token = s.slice(0, s.indexOf(" "));
+    // Capture charcters within strings
     if (token.startsWith("'")) {
       splitInput.push(s.slice(0, s.indexOf("'", 1) + 1));
       s = s.slice(s.indexOf("'", 1) + 1);
-    } else if (token != "") {
-      splitInput.push(token.trim());
+    }
+    // Capture symbols
+    else if (token != "") {
+      splitInput.push(token);
       s = s.slice(s.indexOf(" ") + 1);
-    } else {
-      s = s.slice(s.indexOf(" ") + 1);
+    }
+    // Cut out extra space
+    else {
+      s = s.trim();
     }
   }
   // Add the last section to the array
-  splitInput.push(s.slice(0));
+  splitInput.push(s);
 
   s = splitInput;
   for (var i = 0; i < s.length; i++) {
+    // Exclude strings
     if (!s[i].startsWith("'") && !s[i].endsWith("'")) {
+      // Split properties
       while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
         s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
         s[i] = s[i].slice(0, s[i].indexOf(":"));
       }
+      // Split opening parens
       while (
         (s[i].startsWith("(") && s[i] != "(") ||
         (s[i].startsWith("[") && s[i] != "[")
@@ -55,6 +57,7 @@ function tokenizeString(s) {
         s[i] = s[i].slice(1);
         s.splice(i, 0, "(");
       }
+      // Split closing parens
       while (
         (s[i].endsWith(")") && s[i] != ")") ||
         (s[i].endsWith("]") && s[i] != "]")
@@ -64,12 +67,6 @@ function tokenizeString(s) {
       }
     }
   }
-  // Remove empty strings
-  s = s.map(x => {
-    return x.trim();
-  });
-  console.log(s);
-  s = s.filter(Boolean);
   return s;
 }
 
