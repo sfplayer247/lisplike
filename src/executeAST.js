@@ -77,6 +77,7 @@ function runAST(token, env) {
     // Evaluate normal expressions
     //
     else {
+
       for (var i = 1; i < token.value.length; i++) {
         args.push(runAST(token.value[i], env));
       }
