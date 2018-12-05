@@ -42,29 +42,26 @@ function tokenizeString(s) {
 
   s = splitInput;
   for (var i = 0; i < s.length; i++) {
-    // Exclude strings
-    if (!s[i].startsWith("'") && !s[i].endsWith("'")) {
-      // Split properties
-      while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
-        s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
-        s[i] = s[i].slice(0, s[i].indexOf(":"));
-      }
-      // Split opening parens
-      while (
-        (s[i].startsWith("(") && s[i] != "(") ||
-        (s[i].startsWith("[") && s[i] != "[")
-      ) {
-        s[i] = s[i].slice(1);
-        s.splice(i, 0, "(");
-      }
-      // Split closing parens
-      while (
-        (s[i].endsWith(")") && s[i] != ")") ||
-        (s[i].endsWith("]") && s[i] != "]")
-      ) {
-        s[i] = s[i].slice(0, -1);
-        s.splice(i + 1, 0, ")");
-      }
+    // Split properties
+    while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
+      s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
+      s[i] = s[i].slice(0, s[i].indexOf(":"));
+    }
+    // Split opening parens
+    while (
+      (s[i].startsWith("(") && s[i] != "(") ||
+      (s[i].startsWith("[") && s[i] != "[")
+    ) {
+      s[i] = s[i].slice(1);
+      s.splice(i, 0, "(");
+    }
+    // Split closing parens
+    while (
+      (s[i].endsWith(")") && s[i] != ")") ||
+      (s[i].endsWith("]") && s[i] != "]")
+    ) {
+      s[i] = s[i].slice(0, -1);
+      s.splice(i + 1, 0, ")");
     }
   }
   return s;
