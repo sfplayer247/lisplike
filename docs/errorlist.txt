@@ -4,3 +4,5 @@ tle:2
   Out of bounds.
 tle:3
   User threw error
+tle:4
+  Exceeded maximum iterations of a loop

@@ -15,6 +15,10 @@ export default class Enviroment {
     this.parse = parse;
     this.execute = execute;
     this.output = "";
+    this.options = {
+      whileLoopProtection: true,
+      maxWhileIterations: 10000
+    }
     // Symbol Look Up Table
     this.symLUT = {};
 

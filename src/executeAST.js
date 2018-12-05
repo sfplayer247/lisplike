@@ -53,10 +53,13 @@ function runAST(token, env) {
       var iterations = 0;
       while (
         runAST(token.value[1], env).value != "false" &&
-        iterations < 10000
+        (iterations < env.options.maxWhileIterations || !env.options.whileLoopProtection)
       ) {
         runAST(token.value[2], env);
         iterations++;
+      }
+      if (env.options.whileLoopProtection && iterations >= env.options.maxWhileIterations) {
+        env.error(4,"While loop exceeded maximum amount of iterations. This can be disabled in the enviroment options.")
       }
     }
     //
