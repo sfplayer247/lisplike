@@ -43,7 +43,11 @@ function tokenizeString(s) {
   s = splitInput;
   for (var i = 0; i < s.length; i++) {
     // Split properties
-    while (s[i].indexOf(":") != -1 && !s[i].startsWith(":")) {
+    while (
+      s[i].indexOf(":") != -1 &&
+      !s[i].startsWith(":") &&
+      !s[i].startsWith("'")
+    ) {
       s.splice(i + 1, 0, s[i].slice(s[i].indexOf(":")));
       s[i] = s[i].slice(0, s[i].indexOf(":"));
     }
