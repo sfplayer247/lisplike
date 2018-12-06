@@ -87,49 +87,13 @@ function buildAST(tokens) {
   // Expressions using ()
   //
   if (token == "(") {
-    var ast = [];
-    // Parse tokens until the expression ends
-    while (tokens[0] != ")") {
-      var tok = buildAST(tokens);
-      if (tok != null) ast.push(tok);
-    }
-    // Remove ending parenthesis
-    tokens.shift();
-    // Check if we are trying to access a property
-    if (tokens[0] == undefined || tokens[0][0] != ":") {
-      return { type: "expression", value: ast };
-    } else {
-      return {
-        type: "expression",
-        value: ast,
-        // Remove the colon from the property name
-        property: tokens.shift().slice(1)
-      };
-    }
+    return generateExpression(tokens, token, ")")
   }
   //
   // Expressions using []
   //
   if (token == "[") {
-    var ast = [];
-    // Parse tokens until the expression ends
-    while (tokens[0] != "]") {
-      var tok = buildAST(tokens);
-      if (tok != null) ast.push(tok);
-    }
-    // Remove ending parenthesis
-    tokens.shift();
-    // Check if we are trying to access a property
-    if (tokens[0] == undefined || tokens[0][0] != ":") {
-      return { type: "expression", value: ast };
-    } else {
-      return {
-        type: "expression",
-        value: ast,
-        // Remove the colon from the property name
-        property: tokens.shift().slice(1)
-      };
-    }
+    return generateExpression(tokens, token, "]")
   }
   //
   // Numbers
@@ -172,5 +136,27 @@ function buildAST(tokens) {
         .slice(1);
       return { type: "symbol", value: "", ref: token, property: split };
     }
+  }
+}
+
+function generateExpression(tokens, token, closingParen) {
+  let ast = [];
+  // Parse tokens until the expression ends
+  while (tokens[0] != closingParen) {
+    var tok = buildAST(tokens);
+    if (tok != null) ast.push(tok);
+  }
+  // Remove ending parenthesis
+  tokens.shift();
+  // Check if we are trying to access a property
+  if (tokens[0] == undefined || tokens[0][0] != ":") {
+    return { type: "expression", value: ast };
+  } else {
+    return {
+      type: "expression",
+      value: ast,
+      // Remove the colon from the property name
+      property: tokens.shift().split(":").slice(1)
+    };
   }
 }

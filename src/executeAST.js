@@ -92,7 +92,7 @@ function runAST(token, env) {
         var result = runAST(token.value[0], env)(args, env);
         // Check if a property was accessed
         if (token.hasOwnProperty("property")) {
-          return result.value[token.property];
+          return getProperty(result, token.property);;
         } else {
           return result;
         }
