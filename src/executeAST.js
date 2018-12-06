@@ -53,13 +53,20 @@ function runAST(token, env) {
       var iterations = 0;
       while (
         runAST(token.value[1], env).value != "false" &&
-        (iterations < env.options.maxWhileIterations || !env.options.whileLoopProtection)
+        (iterations < env.options.maxWhileIterations ||
+          !env.options.whileLoopProtection)
       ) {
         runAST(token.value[2], env);
         iterations++;
       }
-      if (env.options.whileLoopProtection && iterations >= env.options.maxWhileIterations) {
-        env.error(4,"While loop exceeded maximum amount of iterations. This can be disabled in the enviroment options.")
+      if (
+        env.options.whileLoopProtection &&
+        iterations >= env.options.maxWhileIterations
+      ) {
+        env.error(
+          4,
+          "While loop exceeded maximum amount of iterations. This can be disabled in the enviroment options."
+        );
       }
     }
     //
@@ -77,7 +84,6 @@ function runAST(token, env) {
     // Evaluate normal expressions
     //
     else {
-
       for (var i = 1; i < token.value.length; i++) {
         args.push(runAST(token.value[i], env));
       }
@@ -139,9 +145,8 @@ function runAST(token, env) {
 
 function getProperty(object, property) {
   var out = object;
-  for (var i=0; i<property.length; i++) {
+  for (var i = 0; i < property.length; i++) {
     out = out.value[property[i]];
-    
   }
   return out;
 }

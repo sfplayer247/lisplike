@@ -11,11 +11,10 @@ export default {
   doctoNum: {
     parameters: "s:string",
     returns: "num",
-    desc:
-      "Converts a string into a number"
+    desc: "Converts a string into a number"
   },
   toNum: (args, env) => {
-    return {type: "number", value: parseFloat(args[0].value)}
+    return { type: "number", value: parseFloat(args[0].value) };
   },
   docprompt: {
     parameters: "msg:string",
@@ -24,12 +23,11 @@ export default {
       "Shows a prompt where the user can input text. Returns the string that the user enters."
   },
   prompt: (args, env) => {
-    var response = prompt(args[0].value)
+    var response = prompt(args[0].value);
     if (response != null) {
-      return {type: 'string', value: response}
-    }
-    else {
-      return {type: 'string', value: ""}
+      return { type: "string", value: response };
+    } else {
+      return { type: "string", value: "" };
     }
   },
   docprint: {
@@ -69,7 +67,9 @@ export default {
     desc: "Sets the value of a variable."
   },
   set: (args, env) => {
-    env.symLUT[args[0].ref] = args[1];
+    env.symLUT[args[0].ref] = {};
+    env.symLUT[args[0].ref].value = args[1].value;
+    env.symLUT[args[0].ref].type = args[1].type;
     env.symLUT[args[0].ref].ref = args[0].ref;
   },
   docgarr: {
