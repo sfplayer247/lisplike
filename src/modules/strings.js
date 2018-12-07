@@ -4,7 +4,7 @@ export default {
     returns: "bool",
     desc: "Checks if the source string starts with <span class='code'>s</span>."
   },
-  startswith: args => {
+  startswith(args) {
     return {
       type: "boolean",
       value: args[0].value.startsWith(args[1].value) ? "true" : "false"
@@ -15,10 +15,11 @@ export default {
     returns: "string",
     desc: "Returns a section of a string."
   },
-  slice: (args, env) => {
+  slice(args, env) {
     if (env.checkTypes(args, ["string", "number", "number"]).valid) {
+      let sliced;
       if (args.length == 3 && args[2].value <= args[0].value.length) {
-        var sliced = args[0].value.slice(args[1].value, args[2].value);
+        sliced = args[0].value.slice(args[1].value, args[2].value);
       }
       // Out of bounds exception because end is greater than length
       else if (args.length == 3 && args[2].value > args[0].value.length) {
@@ -27,7 +28,7 @@ export default {
           "Out of bounds exception, end of slice cannot be greater than string length."
         );
       } else {
-        var sliced = args[0].value.slice(args[1].value);
+        sliced = args[0].value.slice(args[1].value);
       }
       return {
         type: "string",
@@ -36,8 +37,8 @@ export default {
     }
     // Invalid type exception
     else {
-      var e = env.checkTypes(args, ["string", "number", "number"]);
-      var eMessage = `Incorrect type, expected ${e.expected} but got ${
+      let e = env.checkTypes(args, ["string", "number", "number"]);
+      let eMessage = `Incorrect type, expected ${e.expected} but got ${
         e.invalidType
       } instead`;
       env.error(1, eMessage);

@@ -1,15 +1,15 @@
-import Enviroment from "../src/env.js";
+import Environment from "../src/env.js";
 
 function runcode() {
-  var code = document.getElementById("input").value;
+  let code = document.getElementById("input").value;
 
-  var env = new Enviroment();
+  let env = new Environment();
 
-  var start = window.performance.now();
-  var ast = env.parse(code);
-  var end = window.performance.now();
+  let start = window.performance.now();
+  let ast = env.parse(code);
+  let end = window.performance.now();
 
-  var parseTime = end - start;
+  let parseTime = end - start;
   if (document.getElementById("parseCheckbox").checked) {
     console.dir(ast);
   }

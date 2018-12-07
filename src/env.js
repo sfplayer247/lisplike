@@ -10,7 +10,7 @@ import plists from "./modules/plist.js";
 import json from "./modules/json.js";
 import requests from "./modules/requests.js";
 
-export default class Enviroment {
+export default class Environment {
   constructor() {
     this.parse = parse;
     this.execute = execute;
@@ -18,7 +18,7 @@ export default class Enviroment {
     this.options = {
       whileLoopProtection: true,
       maxWhileIterations: 10000
-    }
+    };
     // Symbol Look Up Table
     this.symLUT = {};
 
@@ -29,7 +29,7 @@ export default class Enviroment {
     this.importModule(strings);
     this.importModule(plists);
     this.importModule(json);
-    this.importModule(requests)
+    this.importModule(requests);
   }
 
   // Used for importing javascript modules into the lookup table
@@ -74,7 +74,7 @@ export default class Enviroment {
     expected: the expected type
   */
   checkTypes(args, parameters) {
-    for (var i = 0; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
       if (args[i].type != parameters[i]) {
         return {
           valid: false,

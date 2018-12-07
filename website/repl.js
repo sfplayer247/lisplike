@@ -1,17 +1,17 @@
-import Enviroment from "../src/env.js";
+import Environment from "../src/env.js";
 
-var env = new Enviroment();
+let env = new Environment();
 
 function runcode() {
-  var code = document.getElementById("input").value;
+  let code = document.getElementById("input").value;
   // Clear the value of the input
   document.getElementById("input").value = "";
   // Clear the enviroment output so it we don't repeat outputs
   env.output = "";
 
   // Log the AST to console
-  if (document.getElementById('parseCheckbox').checked) {
-    console.dir(new Enviroment().parse(code))
+  if (document.getElementById("parseCheckbox").checked) {
+    console.dir(new Environment().parse(code));
   }
 
   // Display the output

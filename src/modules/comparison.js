@@ -4,7 +4,7 @@ export default {
     returns: "bool",
     desc: "Takes two arguments and checks if their value is equal."
   },
-  "==": args => {
+  "=="(args) {
     return {
       type: "boolean",
       value: args[0].value == args[1].value ? "true" : "false"
@@ -15,7 +15,7 @@ export default {
     returns: "bool",
     desc: "Takes two arguments and checks if their value is not equal."
   },
-  "!=": args => {
+  "!="(args) {
     return {
       type: "boolean",
       value: args[0].value != args[1].value ? "true" : "false"
@@ -26,7 +26,7 @@ export default {
     returns: "bool",
     desc: "Inverts a boolean."
   },
-  not: args => {
+  not(args) {
     return {
       type: "boolean",
       value: args[0].value == "true" ? "false" : "true"
@@ -37,7 +37,7 @@ export default {
     returns: "bool",
     desc: "Takes two arguments and checks if they are both true."
   },
-  and: args => {
+  and(args) {
     return {
       type: "boolean",
       value:
@@ -49,10 +49,10 @@ export default {
     returns: "bool",
     desc: "Returns true if any of the supplied arguments are true."
   },
-  or: args => {
-    var out = "false";
+  or(args) {
+    let out = "false";
 
-    for (var i = 0; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
       if (args[i].value == "true") {
         out = "true";
       }
@@ -67,18 +67,20 @@ export default {
     returns: "bool",
     desc: "Returns true if a is greater than b."
   },
-  ">": (args, env) => {
-    var types = env.checkTypes(args, ["number", "number"]);
+  ">"(args, env) {
+    let types = env.checkTypes(args, ["number", "number"]);
     if (types.valid) {
       return {
         type: "boolean",
         value: args[0].value > args[1].value ? "true" : "false"
       };
-    }
-    else {
-      env.error(1, `Incorrect type, expected ${types.expected} but got ${
-        types.invalidType
-        } instead`)
+    } else {
+      env.error(
+        1,
+        `Incorrect type, expected ${types.expected} but got ${
+          types.invalidType
+        } instead`
+      );
     }
   },
   "doc<": {
@@ -86,18 +88,20 @@ export default {
     returns: "bool",
     desc: "Returns true if a is less than b."
   },
-  "<": (args, env) => {
-    var types = env.checkTypes(args, ["number", "number"]);
+  "<"(args, env) {
+    let types = env.checkTypes(args, ["number", "number"]);
     if (types.valid) {
       return {
         type: "boolean",
         value: args[0].value < args[1].value ? "true" : "false"
       };
-    }
-    else {
-      env.error(1, `Incorrect type, expected ${types.expected} but got ${
-        types.invalidType
-        } instead`)
+    } else {
+      env.error(
+        1,
+        `Incorrect type, expected ${types.expected} but got ${
+          types.invalidType
+        } instead`
+      );
     }
   },
   "doc>=": {
@@ -105,18 +109,20 @@ export default {
     returns: "bool",
     desc: "Returns true if a is greater than or equal to b."
   },
-  ">=": (args, env) => {
-    var types = env.checkTypes(args, ["number", "number"]);
+  ">="(args, env) {
+    let types = env.checkTypes(args, ["number", "number"]);
     if (types.valid) {
       return {
         type: "boolean",
         value: args[0].value >= args[1].value ? "true" : "false"
       };
-    }
-    else {
-      env.error(1, `Incorrect type, expected ${types.expected} but got ${
-        types.invalidType
-        } instead`)
+    } else {
+      env.error(
+        1,
+        `Incorrect type, expected ${types.expected} but got ${
+          types.invalidType
+        } instead`
+      );
     }
   },
   "doc<=": {
@@ -124,19 +130,20 @@ export default {
     returns: "bool",
     desc: "Returns true if a is less than or equal to b."
   },
-  "<=": (args, env) => {
-    var types = env.checkTypes(args, ["number", "number"]);
+  "<="(args, env) {
+    let types = env.checkTypes(args, ["number", "number"]);
     if (types.valid) {
       return {
         type: "boolean",
         value: args[0].value <= args[1].value ? "true" : "false"
       };
-    }
-    else {
-      env.error(1, `Incorrect type, expected ${types.expected} but got ${
-        types.invalidType
-        } instead`)
+    } else {
+      env.error(
+        1,
+        `Incorrect type, expected ${types.expected} but got ${
+          types.invalidType
+        } instead`
+      );
     }
   }
-  
 };

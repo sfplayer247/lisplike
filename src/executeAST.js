@@ -21,7 +21,7 @@ function runAST(token, env) {
   // Expressions
   //
   if (token.type == "expression") {
-    var args = [];
+    let args = [];
     //
     // Evaluate if statements
     //
@@ -49,8 +49,8 @@ function runAST(token, env) {
     // Evaluate while loops
     //
     else if (token.value[0].ref == "while") {
-      // Safehold put it place so you don't accidentally freeze the page
-      var iterations = 0;
+      // Safehold put in place so you don't accidentally freeze the page
+      let iterations = 0;
       while (
         runAST(token.value[1], env).value != "false" &&
         (iterations < env.options.maxWhileIterations ||
@@ -84,15 +84,15 @@ function runAST(token, env) {
     // Evaluate normal expressions
     //
     else {
-      for (var i = 1; i < token.value.length; i++) {
+      for (let i = 1; i < token.value.length; i++) {
         args.push(runAST(token.value[i], env));
       }
       // If the first element is a function, run it with the arguments
       if (token.value[0].type == "symbol") {
-        var result = runAST(token.value[0], env)(args, env);
+        let result = runAST(token.value[0], env)(args, env);
         // Check if a property was accessed
         if (token.hasOwnProperty("property")) {
-          return getProperty(result, token.property);;
+          return getProperty(result, token.property);
         } else {
           return result;
         }
@@ -143,10 +143,10 @@ function runAST(token, env) {
   }
 }
 
-function getProperty(object, property) {
-  var out = object;
-  for (var i = 0; i < property.length; i++) {
-    out = out.value[property[i]];
+function getProperty(object, properties) {
+  let out = object;
+  for (let property of properties) {
+    out = out.value[property];
   }
   return out;
 }

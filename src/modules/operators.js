@@ -4,11 +4,11 @@ export default {
     returns: "number",
     desc: "Subtracts a number from b."
   },
-  "-": (args, env) => {
+  "-"(args, env) {
     if (args[0].type == "number" && args[1].type == "number") {
       return { type: "number", value: args[0].value - args[1].value };
     } else {
-      var eMessage =
+      let eMessage =
         "Incorrect type provided, expected number but got " +
         (args[0].type == "number" ? args[1].type : args[0].type) +
         " instead.";
@@ -21,11 +21,10 @@ export default {
     returns: "number",
     desc: "Adds one number to another."
   },
-  "+": (args, env) => {
+  "+"(args, env) {
     if (env.checkTypes(args, ["number", "number"]).valid) {
       return { type: "number", value: args[0].value + args[1].value };
-    }
-    else {
+    } else {
       return { type: "string", value: args[0].value + args[1].value };
     }
   },
@@ -33,9 +32,9 @@ export default {
     parameters: "a:symbol b:number",
     returns: "number",
     desc:
-      "Increments the value of variable <span class='code'>a</span> by <span class='code'>b</span>."
+      "Increments the value of letiable <span class='code'>a</span> by <span class='code'>b</span>."
   },
-  "+=": (args, env) => {
+  "+="(args, env) {
     env.symLUT[args[0].ref].value += args[1].value;
   },
   "doc*": {
@@ -43,7 +42,7 @@ export default {
     returns: "number",
     desc: "Multiplies a by b."
   },
-  "*": args => {
+  "*"(args) {
     return { type: "number", value: args[0].value * args[1].value };
   },
   "doc/": {
@@ -51,7 +50,7 @@ export default {
     returns: "number",
     desc: "Divides a by b."
   },
-  "/": args => {
+  "/"(args) {
     return { type: "number", value: args[0].value / args[1].value };
   },
   "doc**": {
@@ -60,7 +59,7 @@ export default {
     desc:
       "Returns the base to the power of <span class='code'>power</span>. If the <span class='code'>power</span> is not given then it defaults to 2."
   },
-  "**": args => {
+  "**"(args) {
     return {
       type: "number",
       value: Math.pow(args[0].value, args.length == 2 ? args[1].value : 2)

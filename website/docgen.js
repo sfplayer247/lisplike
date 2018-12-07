@@ -9,9 +9,9 @@
 */
 
 function getDocsFromModule(module) {
-  var docs = {};
-  var keys = Object.keys(module);
-  for (var i = 0; i < keys.length; i++) {
+  let docs = {};
+  let keys = Object.keys(module);
+  for (let i = 0; i < keys.length; i++) {
     if (keys[i].startsWith("doc")) {
       docs[keys[i].slice(3)] = module[keys[i]];
     }
@@ -56,8 +56,8 @@ function getParameters(name, parameters) {
   if (typeof parameters == "string") {
     return "<h5>( " + name + " <em>" + parameters + "</em> )<br /></h5>";
   } else {
-    var out = "<h5>";
-    for (var i = 0; i < parameters.length; i++) {
+    let out = "<h5>";
+    for (let i = 0; i < parameters.length; i++) {
       out += "( " + name + " <em>" + parameters[i] + "</em> )<br />";
     }
     return out;
@@ -74,8 +74,8 @@ function getParameters(name, parameters) {
   returns string
 */
 function createHTMLFromDocs(docs, name) {
-  var html = "";
-  for (var i = 0; i < Object.keys(docs).length; i++) {
+  let html = "";
+  for (let i = 0; i < Object.keys(docs).length; i++) {
     html += createHTMLFromDoc(
       Object.keys(docs)[i],
       docs[Object.keys(docs)[i]],
@@ -86,9 +86,9 @@ function createHTMLFromDocs(docs, name) {
 }
 
 function generateTableOfContents(docs, name) {
-  var keys = Object.keys(docs);
-  var html = `<li><a href="#docs${name}">${name}</a><ol>`;
-  for (var i = 0; i < keys.length; i++) {
+  let keys = Object.keys(docs);
+  let html = `<li><a href="#docs${name}">${name}</a><ol>`;
+  for (let i = 0; i < keys.length; i++) {
     html += `<li><a href="#docs${name + keys[i]}">${keys[i]}</a></li>`;
   }
   return html + "</ol ></li>";
@@ -107,7 +107,7 @@ function generateTableOfContents(docs, name) {
   returns void
 */
 export default async function addDocsToPage(name, module) {
-  var docs = getDocsFromModule(module);
+  let docs = getDocsFromModule(module);
   document.getElementById(
     "tableofcontents"
   ).innerHTML += generateTableOfContents(docs, name);

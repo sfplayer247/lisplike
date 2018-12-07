@@ -5,7 +5,7 @@ export default {
     desc:
       "Throws an error with the provided message. Will always use error 3 because that means a user defined exception."
   },
-  throw: (args, env) => {
+  throw(args, env) {
     env.error(3, args[0].value);
   },
   doctoNum: {
@@ -13,7 +13,7 @@ export default {
     returns: "num",
     desc: "Converts a string into a number"
   },
-  toNum: (args, env) => {
+  toNum(args, env) {
     return { type: "number", value: parseFloat(args[0].value) };
   },
   docprompt: {
@@ -22,8 +22,8 @@ export default {
     desc:
       "Shows a prompt where the user can input text. Returns the string that the user enters."
   },
-  prompt: (args, env) => {
-    var response = prompt(args[0].value);
+  prompt(args, env) {
+    let response = prompt(args[0].value);
     if (response != null) {
       return { type: "string", value: response };
     } else {
@@ -35,8 +35,8 @@ export default {
     returns: "void",
     desc: "Takes 1+ arguments of any type and appends them to the output."
   },
-  print: (args, env) => {
-    for (var i = 0; i < args.length; i++) {
+  print(args, env) {
+    for (let i = 0; i < args.length; i++) {
       env.output += args[i].value;
     }
     env.output += "\n";
@@ -46,7 +46,7 @@ export default {
     returns: "array",
     desc: "Returns an array element that contains the arguments."
   },
-  arr: args => {
+  arr(args) {
     return {
       type: "array",
       value: args
@@ -58,15 +58,15 @@ export default {
     desc:
       "Runs the expressions after it, returns nothing. This is useful when you want to run several expressions in a row."
   },
-  void: args => {
+  void(args) {
     return null;
   },
   docset: {
-    parameters: "varname:symbol|value:any",
+    parameters: "letname:symbol|value:any",
     returns: "null",
-    desc: "Sets the value of a variable."
+    desc: "Sets the value of a letiable."
   },
-  set: (args, env) => {
+  set(args, env) {
     env.symLUT[args[0].ref] = {};
     env.symLUT[args[0].ref].value = args[1].value;
     env.symLUT[args[0].ref].type = args[1].type;
@@ -75,9 +75,9 @@ export default {
   docgarr: {
     parameters: "array:arrar|index:num",
     returns: "Gets the element at location <span class='code'>index</span>.",
-    desc: "Sets the value of a variable."
+    desc: "Sets the value of a letiable."
   },
-  garr: args => {
+  garr(args) {
     return args[0].value[args[1].value];
   }
 };

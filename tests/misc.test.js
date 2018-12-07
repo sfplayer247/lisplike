@@ -1,7 +1,7 @@
-import Enviroment from "../src/env.js";
+import Environment from "../src/env.js";
 
 function runNewEnvironment(code) {
-  return new Enviroment().run(code).output.trim();
+  return new Environment().run(code).output.trim();
 }
 
 // Exception handling

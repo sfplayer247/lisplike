@@ -4,7 +4,7 @@ export default function parse(x) {
 
 /*
   tokenizeString(string s)
-  description: splits the string by parenthesis
+  description: turns strings into tokens
 
   param s
     type: string
@@ -12,10 +12,8 @@ export default function parse(x) {
   returns array
 */
 function tokenizeString(s) {
-  let tmp = "";
-  // Split on newlines and pad each line
-  s.split("\n").forEach(e => (tmp += ` ${e.trim()} `));
-  s = tmp;
+  // Make the program one line and pad each line
+  s = s.split("\n").reduce((acc, cur) => acc + ` ${cur.trim()} `);
 
   // Split on spaces and isolate strings
   let splitInput = [];
@@ -41,10 +39,10 @@ function tokenizeString(s) {
   splitInput.push(s);
 
   s = splitInput;
-  for (var i = 0; i < s.length; i++) {
+  for (let i = 0; i < s.length; i++) {
     // Split properties
     while (
-      s[i].indexOf(":") != -1 &&
+      s[i].includes(":") &&
       !s[i].startsWith(":") &&
       !s[i].startsWith("'")
     ) {
@@ -82,18 +80,18 @@ function tokenizeString(s) {
     description: the parsed AST
 */
 function buildAST(tokens) {
-  var token = tokens.shift();
+  let token = tokens.shift();
   //
   // Expressions using ()
   //
   if (token == "(") {
-    return generateExpression(tokens, token, ")")
+    return generateExpression(tokens, token, ")");
   }
   //
   // Expressions using []
   //
   if (token == "[") {
-    return generateExpression(tokens, token, "]")
+    return generateExpression(tokens, token, "]");
   }
   //
   // Numbers
@@ -130,7 +128,7 @@ function buildAST(tokens) {
       return { type: "symbol", value: "", ref: token };
     } else {
       // Split the symbol into the name and property
-      var split = tokens
+      let split = tokens
         .shift()
         .split(":")
         .slice(1);
@@ -143,7 +141,7 @@ function generateExpression(tokens, token, closingParen) {
   let ast = [];
   // Parse tokens until the expression ends
   while (tokens[0] != closingParen) {
-    var tok = buildAST(tokens);
+    let tok = buildAST(tokens);
     if (tok != null) ast.push(tok);
   }
   // Remove ending parenthesis
@@ -156,7 +154,10 @@ function generateExpression(tokens, token, closingParen) {
       type: "expression",
       value: ast,
       // Remove the colon from the property name
-      property: tokens.shift().split(":").slice(1)
+      property: tokens
+        .shift()
+        .split(":")
+        .slice(1)
     };
   }
 }
