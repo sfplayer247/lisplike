@@ -11,9 +11,10 @@
 function getDocsFromModule(module) {
   let docs = {};
   let keys = Object.keys(module);
-  for (let i = 0; i < keys.length; i++) {
-    if (keys[i].startsWith("doc")) {
-      docs[keys[i].slice(3)] = module[keys[i]];
+  for (let key of keys) {
+    if (key.startsWith("doc")) {
+      // The first 3 letters are removed to remove the 'doc' prefix from every doc entry
+      docs[key.slice(3)] = module[key];
     }
   }
 
@@ -57,8 +58,8 @@ function getParameters(name, parameters) {
     return "<h5>( " + name + " <em>" + parameters + "</em> )<br /></h5>";
   } else {
     let out = "<h5>";
-    for (let i = 0; i < parameters.length; i++) {
-      out += "( " + name + " <em>" + parameters[i] + "</em> )<br />";
+    for (let parameter of parameters) {
+      out += "( " + name + " <em>" + parameter + "</em> )<br />";
     }
     return out;
   }
