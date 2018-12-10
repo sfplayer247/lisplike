@@ -10,6 +10,18 @@ export default {
       value: args[0].value.startsWith(args[1].value) ? "true" : "false"
     };
   },
+  docindexOf: {
+    parameters: "source:string|substr:string",
+    returns: "number",
+    desc:
+      "Checks if the source string contains the substr, returns the location of the substr or -1 if it cannot be found."
+  },
+  indexOf(args) {
+    return {
+      type: "number",
+      value: args[0].value.indexOf(args[1].value)
+    };
+  },
   docslice: {
     parameters: ["source:string|start:num", "source:string|start:num|end:num"],
     returns: "string",

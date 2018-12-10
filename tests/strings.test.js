@@ -25,3 +25,12 @@ test("Slice with one argument", () => {
 test("Slice with two arguments", () => {
   expect(runNewEnvironment("(print (slice 'hello world' 0 5))")).toBe("hello");
 });
+
+// indexOf
+test("indexOf finds w", () => {
+  expect(runNewEnvironment("(print (indexOf 'hello world' 'w'))")).toBe("6");
+});
+
+test("indexOf does not find z", () => {
+  expect(runNewEnvironment("(print (indexOf 'hello world' 'z'))")).toBe("-1");
+});
