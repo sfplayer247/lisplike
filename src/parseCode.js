@@ -18,7 +18,7 @@ function tokenizeString(s) {
   // Split on spaces and isolate strings
   let splitInput = [];
   let token;
-  while (s.indexOf(" ") != -1) {
+  while (s.includes(" ")) {
     token = s.slice(0, s.indexOf(" "));
     // Capture charcters within strings
     if (token.startsWith("'")) {

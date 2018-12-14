@@ -16,6 +16,14 @@ export default {
   toNum(args, env) {
     return { type: "number", value: parseFloat(args[0].value) };
   },
+  doctoStr: {
+    parameters: "n:num",
+    returns: "string",
+    desc: "Converts a number into a string"
+  },
+  toStr(args, env) {
+    return { type: "string", value: `${args[0].value}` };
+  },
   docprompt: {
     parameters: "msg:string",
     returns: "string",

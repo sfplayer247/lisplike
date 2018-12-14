@@ -21,7 +21,6 @@ function runAST(token, env) {
   // Expressions
   //
   if (token.type == "expression") {
-    let args = [];
     //
     // Evaluate if statements
     //
@@ -84,6 +83,7 @@ function runAST(token, env) {
     // Evaluate normal expressions
     //
     else {
+      let args = [];
       for (let i = 1; i < token.value.length; i++) {
         args.push(runAST(token.value[i], env));
       }

@@ -121,3 +121,13 @@ test("String can contain ']', '[', ')', '(' and ':'", () => {
     "][)(: ] [ ) ( : end"
   );
 });
+
+// toStr
+test("toStr succesfully converts number to string", () => {
+  expect(runNewEnvironment("(print (+ 123 (toStr 123)))")).toBe("123123");
+});
+
+// toNum
+test("toNum succesfully converts string to number", () => {
+  expect(runNewEnvironment("(print (+ 8 (toNum '-4')))")).toBe("4");
+});
