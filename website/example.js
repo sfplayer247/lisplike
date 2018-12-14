@@ -1,46 +1,50 @@
 /*
-<div>
-        <h4 id="examplesimplemath">Simple Math:</h4>
-        <p class="code">
-          (void<br />
-          &nbsp(print '2 times 2 equals: ' (* 2 2))<br />
-          &nbsp(print '2 plus 2 equals: ' (+ 2 2))<br />
-          &nbsp(print '2 minus 1 equals: ' (- 2 1))<br />
-          &nbsp(print '8 divided by 2 equals: ' (/ 8 2))<br />
-          &nbsp(print '2 to the power of 4 equals: ' (** 2 4))<br />
-          )<br />
-        </p>
-        <button
-          onclick="viewInTryIt(`(void
- (print '2 times 2 equals: ' (* 2 2))
- (print '2 plus 2 equals: ' (+ 2 2))
- (print '2 minus 1 equals: ' (- 2 1))
- (print '8 divided by 2 equals: ' (/ 8 2))
- (print '2 to the power of 4 equals: ' (** 2 4))
-)`)"
-        >
-          Try it >
-        </button>
-      </div>
-*/
+  showInTryIt(code)
+  description: Open the lisp interpreter and autofill it with the code string.
 
+  param code
+    type: string
+    description: The code to be autofilled in the intrepreter
+  returns void
+*/
 function showInTryIt(code) {
   localStorage.setItem("tryitView", code);
   window.location.pathname += "tryit.html";
 }
 
+/*
+  addFunctionToHTML(linkname, title, code)
+  description: Creates an example section on the page
+
+  param linkname
+    type: string
+    description: The name ot be used for the link to the example
+
+  param title
+    type: string
+    description: The title of the example
+  
+  param code
+    type: string
+    description: The code to be autofilled in the intrepreter
+  returns void
+*/
 export default function addFunctionToHTML(linkname, title, code) {
   let html = document.createElement("div");
   html.innerHTML = `
   <h4 id="example${linkname}">${title}</h4>
   <p class="code"></p>
   <button class="showInTryIt">Try it ></button>`;
+
   html.querySelector(".code").innerText = code;
+  // Make the button redirect the user to the interpreter
   html
     .querySelector(".showInTryIt")
     .addEventListener("click", () => showInTryIt(code));
 
+  // Add the example section to the page
   document.querySelector("#examplesautogen").appendChild(html);
+  // Create a link in the table of contents to the example section
   document
     .querySelector("#tableofcontentsexamples")
     .insertAdjacentHTML(
